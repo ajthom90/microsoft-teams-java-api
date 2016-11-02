@@ -33,12 +33,10 @@ This utility will pull in all of its required dependencies.  In order to use, pa
 A very simple implementation is as follows:
 
 ```
-MicrosoftTeams.forUrl(new Webhook()
-			{
-				@Override
-				public String getUrl()
-				{
-					return "https://outlook.office365.com/webhook/......."; //$NON-NLS-1$
-				}
-			}).sendMessage(sb.toString());
+MicrosoftTeams.forUrl(new Webhook() {
+	@Override
+	public String getUrl() {
+		return "https://outlook.office365.com/webhook/......."; //$NON-NLS-1$
+	}
+}).sendMessage(sb.toString());
 ```
