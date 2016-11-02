@@ -27,8 +27,18 @@ And add the following dependency:
 
 The version number can be any release as defined on GitHub.  To always keep up to date with the latest branch, set the version to ```master-SNAPSHOT```.
 
-## Prerequisites
-This utility requires Spring Security, and also the Spring JDBC JAR on the build path.  At this time, the utility will only log to a database via JDBC, but in the future it may support other datastores.  If you have an idea for another datastore, please submit an issue (or, even better, download the source code, add support, and submit a pull request!!).  
+## How To Use
+This utility will pull in all of its required dependencies.  In order to use, pass the ```MicrosoftTeams``` class a class that implements the ```Webhook``` interface.  The only method on the interface is one that returns the URL of the Webhook as provided by Microsoft Teams.  The ```Webhook``` interface can be easily implemented by an Enum if desired to provide a static location for all of your channels.
 
-## Database Table Layout
-The database table layout is fairly simple (four columns, using a GUID as the primary key).  Sample DDL for MySQL can be found in [src/main/java/com/github/ajthom/springsecurityloginlogger/service](https://github.com/ajthom90/spring-security-login-logger/blob/master/spring-security-login-logger/src/main/java/com/github/ajthom90/springsecurityloginlogger/service/mysql_table_layout.sql).
+A very simple implementation is as follows:
+
+```
+MicrosoftTeams.forUrl(new Webhook()
+			{
+				@Override
+				public String getUrl()
+				{
+					return "https://outlook.office365.com/webhook/......."; //$NON-NLS-1$
+				}
+			}).sendMessage(sb.toString());
+```
